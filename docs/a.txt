@@ -1,0 +1,17 @@
+In the Audio2Lmk stage, we adopt wav2vec2.0 as our backbone. We leverage
+MediaPipe[7] to extract 3D meshes and 6D poses for annotations. The training
+data for Audio2Mesh comes from our internal dataset, which comprises nearly an
+hour of high-quality speech data from a single speaker. To ensure the stability
+of the 3D mesh extracted by MediaPipe, we instruct the actor to maintain a
+steady head position, facing the camera throughout the recording process. We
+train Audio2Pose using HDTF[18]. All training operations are performed on a
+single A100, utilizing the Adam optimizer with a learning rate of 1e-5.
+In the Lmk2Video process, we implement a two-step training approach. During the initial step, we focus on training the 2D component of the backbone,
+ReferenceNet, and PoseGuider, leaving out the motion module. In the subsequent step, we freeze all other components and concentrate on the training of
+the motion module. We make use of two large-scale, high-quality facial video
+datasets, VFHQ[12] and CelebV-HQ[19] to train the model. All data undergoes
+processing via MediaPipe to extract 2D facial landmarks. To enhance the network’s sensitivity to lip movements, we differentiate the upper and lower lips
+with distinct colors when rendering the pose image from 2D landmarks. All
+images are resized to 512x512 resolution. We utilize 4 A100 GPUs for model
+training, dedicating two days to each step. The AdamW optimizer is employed,
+with a consistent learning rate of 1e-5.

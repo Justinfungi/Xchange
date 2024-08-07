@@ -1,0 +1,17 @@
+https://github.com/promptslab/openai-detector
+
+
+
+
+
+
+
+python 0.sentences_length.py
+
+
+1. Word Count
+2. Sentences Length: python 1.dist_test.py
+3. Pattern: They, (xxx), 
+4. Sentence Pattern + Tag Sequence
+5. Finetune with data : openai jobID ftjob-JlmLHGmFjHmIAN8J0G7qYq1g
+6. Suspicous Words:
